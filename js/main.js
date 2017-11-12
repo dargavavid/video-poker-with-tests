@@ -7,12 +7,6 @@ const app = {
     }
 };
 
-const cardValues = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41];
-const cardNames = ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"];
-const suiteValues = [1, 2, 3, 4];
-const suiteNames = ["spades", "clubs", "hearts", "diamonds"];
-
-
 const valuePatterns = {
     "aabcd": "pair",
     "aabbc": "twopairs",
@@ -25,16 +19,22 @@ const suitePatterns = {
     "aaaaa": "flush",
 }
 
-function createCard(value, suite) {
-    return new Card(value, suite);
+const cardValues = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41];
+const cardNames = ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"];
+const suiteValues = [1, 2, 3, 4];
+const suiteNames = ["spades", "clubs", "hearts", "diamonds"];
+
+function createCard(name, value, suite) {
+    return new Card(name, value, suite);
 }
 
-function createDeck(values, suites) {
+function createDeck(values, suites, cardNames, suiteNames) {
     const deck = [];
-    let card;
+    let cardName, card;
     for (let i = 0; i < values.length; i++) {
         for (let j = 0; j < suites.length; j++) {
-            card = createCard(values[i], suites[j]);
+            cardName = cardNames[i] + " of " + suiteNames[j];
+            card = createCard(cardName, values[i], suites[j]);
             deck.push(card);
         }
     }

@@ -1,17 +1,11 @@
 const T = new Test();
 
-const c1 = new Card("A", "club");
 T.it("Should create card", [
-    T.assertSimilar(createCard(1,1), new Card(1,1))
+    T.assertSimilar(createCard("ace of spades", 41, 1), new Card("ace of spades", 41, 1))
 ]);
 
 T.it("Should create deck", [
-    T.assertSimilar(createDeck(cardValues, suiteValues).map(x => x.value).sort(), [...cardValues,...cardValues, ...cardValues, ...cardValues].sort())
-]);
-
-T.it("Card should have value and suite defined",[
-    T.assertEquals(c1.value, "A"),
-    T.assertEquals(c1.suite, "club")
+    T.assertSimilar(createDeck(cardValues, suiteValues, cardNames, suiteNames).map(x => x.value).sort(), [...cardValues,...cardValues, ...cardValues, ...cardValues].sort())
 ]);
 
 T.it("Should detect duplication", [
