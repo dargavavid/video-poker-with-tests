@@ -40,10 +40,10 @@ class Test {
             this.handleTypeError("Custom message", "string", customMessageType);
         }
         if (actual === expected) {
-            console.log(customMessage + " --> Assertion passed!");
+            console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace(customMessage + " --> Assertion failed!");
+            console.trace("Assertion passed! --> " + customMessage);
             return false;
         }
     }
@@ -56,10 +56,10 @@ class Test {
             this.handleTypeError("Custom message", "string", customMessageType);
         }
         if (actual !== expected) {
-            console.log(customMessage + " --> Assertion passed!");
+            console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace(customMessage + " --> Assertion failed!");
+            console.trace("Assertion passed! --> " + customMessage);
             return false;
         }
     }
