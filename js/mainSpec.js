@@ -55,6 +55,7 @@ T.it("Should get hand values", [
 ]);
 
 T.it("Should shuffle deck", [
+    T.assertEquals(shuffleDeck(testDeck).length, testDeck.length),
     T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
     T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
     T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
@@ -80,3 +81,7 @@ T.it("Should calculate rewards properly", [
     T.assertEquals(calcReward("poker", 1, multiplierTable), 25),
     T.assertEquals(calcReward("royalflush", 1, multiplierTable), 250),
 ]);
+
+// for (let i = 0; i < 100; i++) {
+//     console.log(simulateRound());
+// }

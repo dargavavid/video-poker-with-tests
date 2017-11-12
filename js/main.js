@@ -3,13 +3,13 @@ const app = {
         maxCardValue: 14,
     },
     state: {
-        moneyWagered: 0
+        moneyWagered: 1
     }
 };
 
 const handOrder = {
     "nothing": 0,
-    "pair": 1,
+    "onepair": 1,
     "twopairs": 2,
     "threeofakind": 3,
     "straight": 4,
@@ -22,7 +22,7 @@ const handOrder = {
 
 const multiplierTable = {
     "nothing": 0,
-    "pair": 1,
+    "onepair": 1,
     "twopairs": 2,
     "threeofakind": 3,
     "straight": 4,
@@ -171,8 +171,8 @@ function getHandValue(hand) {
 function shuffleDeck(d) {
     const deck = [...d];
     let randIndex;
-    for(let i = deck.length; i >= 0; i--) {
-        randIndex = Math.floor(Math.random() * i);
+    for (let i = 0; i < deck.length; i++) {
+        randIndex = Math.floor(Math.random() * (deck.length - i) + i);
         [deck[i], deck[randIndex]] = [deck[randIndex], deck[i]];//Swap cards.
     }
     return deck;
@@ -183,9 +183,17 @@ function pickHand(deck, start = 0) {
     return deck.slice(start, start + 5);
 }
 
-//Create function to calculate reward for given hand:
+//Create function to calculate reward for given hand.
 function calcReward(hand, wagered, mTable) {
     return mTable[hand] * wagered;
 }
 
-//Create function to start round
+//Create function to simulate round.
+function simulateRound() {
+    const deck = createDeck(cardValues, suiteValues, cardNames, suiteNames);
+    const shuffled = shuffleDeck(deck);
+    const hand = pickHand(shuffled);
+    const handValue = getHandValue(hand);
+    const reward = calcReward(handValue, app.state.moneyWagered, multiplierTable);
+    return reward;
+}
