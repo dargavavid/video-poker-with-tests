@@ -66,3 +66,8 @@ T.it("Should shuffle deck", [
     T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
     T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
 ]);
+
+
+T.it("Should select 5 cards from deck", [
+    T.assertEquals(pickHand(testDeck).length, 5)
+]);
