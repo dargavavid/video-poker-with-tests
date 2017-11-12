@@ -2,6 +2,9 @@ class Test {
     handleTypeError(name, expectedType, actualType) {
         throw new Error(`${name} must be of ${expectedType} type, instead you provided: ${actualType}`);
     }
+    handleAssertionFail(actual, expected, msg) {
+        console.trace(`Assertion failed! Expected: ${this.stringify(expected)}, instead got: ${this.stringify(actual)}! ${msg}`);
+    }
     //Create function to turn value/object into string and return the string representation.
     stringify(object) {
         return JSON.stringify(object);
@@ -43,7 +46,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion failed! X " + customMessage);
+            this.handleAssertionFail(actual, expected, customMessage);
             return false;
         }
     }
@@ -59,7 +62,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion failed! X " + customMessage);
+            this.handleAssertionFail(actual, expected, customMessage);
             return false;
         }
     }
@@ -78,7 +81,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion failed! X " + customMessage);
+            this.handleAssertionFail(actual, expected, customMessage);
             return false;
         }
     }
@@ -97,7 +100,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion failed! X " + customMessage);
+            this.handleAssertionFail(actual, expected, customMessage);
             return false;
         }
     }
@@ -114,6 +117,7 @@ class Test {
         }
         const successfulAssertions = assertions.filter(assertion => assertion === true);
         console.log(`${message}: ${successfulAssertions.length} of ${assertions.length} tests passed (${(successfulAssertions.length / assertions.length) * 100}%)`);
+        console.log("");//To separate logs.
         return assertions.length === successfulAssertions.length ? true : false;
     }
 }

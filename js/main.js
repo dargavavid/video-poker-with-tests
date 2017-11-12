@@ -1,11 +1,23 @@
-const valuePatterns = {
-    pair: "aabcd",
-    twopairs: "aabbc",
-    threeofakind:"aaabc",
-    straight: "abcde",
-    fullhouse: "aaabc",
-    poker: "aaaab"
+const app = {
+    settings: {
+        cardValueMin: 2,
+        cardValueMax: 14,
+        suiteValueMin: 1,
+        suiteValue: 4
+    }
 };
+
+const valuePatterns = {
+    "aabcd": "pair",
+    "aabbc": "twopairs",
+    "aaabc": "threeofakind",
+    "aaabb": "fullhouse",
+    "aaaab": "poker"
+};
+
+const suitePatterns = {
+    "aaaaa": "flush",
+}
 
 function isDuplicated(target, elements) {
     return elements.filter(element => element === target).length > 1;
@@ -24,9 +36,22 @@ function substractArrays(arr1, arr2) {
     return arr1.filter(el => arr2.indexOf(el) === -1);
 }
 
+function countElement(element, arr) {
+    return arr.filter(x => x === element).length;
+}
+
 //Order duplicates in desc order, non-duplicates in asc order.
 function orderElements(elements) {
-    const orderedDuplicates = getDuplicates(elements).sort().reverse();
+    const orderedDuplicates = getDuplicates(elements).sort((a,b) => {
+        const countA = countElement(a, elements);
+        const countB = countElement(b, elements);
+        if (countA !== countB) {
+            return countA > countB ? -1 : 1;
+        }else {
+            return a === b ? 0 : a > b ? -1 : 1;
+        }
+    });
+
     const orderedNonDuplicates = substractArrays(elements, orderedDuplicates).sort();
     return [...orderedDuplicates, ...orderedNonDuplicates];
 }
@@ -48,3 +73,18 @@ function getPattern(elements) {
     return pattern;
 }
 
+//Takes in an array of Card objects, return value of hand.
+function getHandValue(hand) {
+    const cardValues = hand.map(cardObj => cardObj.value);
+    const cardSuites = hand.map(cardObj => cardObj.suite);
+    const orderedCardValues = orderElements(cardValues);
+    const highestCardValue = orderedCardValues[orderedCardValues.length - 1];
+
+    const valuePattern = getPattern(orderedCardValues);
+    const suitePattern = getPattern(cardSuites);
+    const handValue = valuePatterns[valuePattern];
+    const suiteValue = suitePatterns[suitePattern];
+    if (handValue) {
+        return handValue;
+    }
+}
