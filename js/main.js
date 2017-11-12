@@ -24,17 +24,19 @@ const cardNames = ["two", "three", "four", "five", "six", "seven", "eight", "nin
 const suiteValues = [1, 2, 3, 4];
 const suiteNames = ["spades", "clubs", "hearts", "diamonds"];
 
-function createCard(name, value, suite) {
-    return new Card(name, value, suite);
+function createCard(value, suite, name) {
+    return new Card(value, suite, name);
 }
 
-function createDeck(values, suites, cardNames, suiteNames) {
+function createDeck(cardValues, suiteValues, cardNames, suiteNames) {
     const deck = [];
-    let cardName, card;
-    for (let i = 0; i < values.length; i++) {
-        for (let j = 0; j < suites.length; j++) {
+    let card, cardValue, suiteValue, cardName;
+    for (let i = 0; i < cardValues.length; i++) {
+        for (let j = 0; j < suiteValues.length; j++) {
+            cardValue = cardValues[i];
+            suiteValue = suiteValues[j];
             cardName = cardNames[i] + " of " + suiteNames[j];
-            card = createCard(cardName, values[i], suites[j]);
+            card = createCard(cardValue, suiteValue, cardName);
             deck.push(card);
         }
     }

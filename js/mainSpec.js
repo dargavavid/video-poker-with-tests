@@ -1,7 +1,7 @@
 const T = new Test();
 
 T.it("Should create card", [
-    T.assertSimilar(createCard("ace of spades", 41, 1), new Card("ace of spades", 41, 1))
+    T.assertSimilar(createCard(41, 1, "ace of spades"), new Card(41, 1, "ace of spades"))
 ]);
 
 T.it("Should create deck", [
