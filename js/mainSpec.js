@@ -27,4 +27,5 @@ T.it("Should get patterns", [
     T.assertEquals(getPattern([1,1,2,3,5]), "aabcd"),
     T.assertEquals(getPattern([1,1,1,3,5]), "aaabc"),
     T.assertEquals(getPattern([1,1,1,1,1]), "aaaaa"),
+    T.assertEquals(getPattern([1,1,2,1,1]), "aabaa"),
 ]);

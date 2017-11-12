@@ -31,14 +31,20 @@ function orderElements(elements) {
     return [...orderedDuplicates, ...orderedNonDuplicates];
 }
 
+//Turn an array of elements into string pattern, showing only similarities and differences between elements.
 function getPattern(elements) {
-    const symbols = "abcde";
-    let pattern = "";
+    const symbols = "abcdefghijklmnopqrstuvwxyz";
+    const usedSymbols = {};
+    let pattern = "", element;
     for (let i = 0, si = 0; i < elements.length; i++) {
-        if (elements[i - 1] !== elements[i] && i > 0) {
-            si++;
+        element = elements[i];
+        //If element has no assigned symbol yet, assign one.
+        if (!usedSymbols[element]) {
+            usedSymbols[element] = symbols[si];
+            si++;//Increment symbol index.
         }
-        pattern += symbols[si];
+        pattern += usedSymbols[element];//Append pattern with corresponding symbol.
     }
     return pattern;
 }
+
