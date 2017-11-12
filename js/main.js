@@ -1,14 +1,25 @@
 const app = {
     settings: {
-        cardValueMin: 2,
-        cardValueMax: 14,
-        suiteValueMin: 1,
-        suiteValue: 4
+        maxCardValue: 14
     }
 };
 
+const handOrder = {
+    "nothing": 0,
+    "pair": 1,
+    "twopairs": 2,
+    "threeofakind": 3,
+    "straight": 4,
+    "flush": 5,
+    "fullhouse": 6,
+    "poker": 7,
+    "straightflush": 8,
+    "royalflush": 9
+};
+
 const valuePatterns = {
-    "aabcd": "pair",
+    "abcde": "nothing",
+    "aabcd": "onepair",
     "aabbc": "twopairs",
     "aaabc": "threeofakind",
     "aaabb": "fullhouse",
@@ -17,9 +28,10 @@ const valuePatterns = {
 
 const suitePatterns = {
     "aaaaa": "flush",
+    //LATER ON IMPLEMENT BONUS PATTERNS??
 }
 
-const cardValues = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41];
+const cardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 const cardNames = ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"];
 const suiteValues = [1, 2, 3, 4];
 const suiteNames = ["spades", "clubs", "hearts", "diamonds"];
@@ -109,6 +121,9 @@ function getHandValue(hand) {
     const handValue = valuePatterns[valuePattern];
     const suiteValue = suitePatterns[suitePattern];
 
+    //Check flush
+    const isFlush = suiteValue === "flush";
+
     //Check straight
     const isStraight = orderedCardValues.map((card, i, cards) => {
         if (i > 0) {
@@ -121,7 +136,17 @@ function getHandValue(hand) {
             return 1;
         }
     }).reduce((product, x) => product *= x, 1) === 1;
-    if (handValue) {
+
+    //Check royal flush
+    if (isStraight && isFlush && highestCardValue === app.settings.maxCardValue) {
+        return "royalflush";
+    }else if (isStraight && isFlush) {//Check straight flush
+        return "straightflush";
+    }else if (isFlush) {//Check flush
+        return "flush";
+    }else if (isStraight) {//Check straight
+        return "straight";
+    }else {//Check all other proper combinations
         return handValue;
     }
 }

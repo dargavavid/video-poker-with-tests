@@ -41,11 +41,14 @@ T.it("Should get patterns", [
 ]);
 
 T.it("Should get hand values", [
-    T.assertEquals(getHandValue([new Card(2,1), new Card(2,2), new Card(3,3), new Card(4,1), new Card(5,4)]), "pair", "Should recognize pair"),
+    T.assertEquals(getHandValue([new Card(2,1), new Card(2,2), new Card(3,3), new Card(4,1), new Card(5,4)]), "onepair", "Should recognize pair"),
     T.assertEquals(getHandValue([new Card(2,1), new Card(2,2), new Card(2,3), new Card(4,1), new Card(5,4)]), "threeofakind", "Should recognize three of a kind"),
     T.assertEquals(getHandValue([new Card(2,1), new Card(2,2), new Card(4,3), new Card(4,1), new Card(5,4)]), "twopairs", "Should recognize two pairs"),
     T.assertEquals(getHandValue([new Card(2,1), new Card(1,2), new Card(1,3), new Card(1,1), new Card(2,4)]), "fullhouse", "Should recognize full house"),
     T.assertEquals(getHandValue([new Card(1,1), new Card(1,2), new Card(1,3), new Card(1,1), new Card(2,4)]), "poker", "Should recognize poker"),
     T.assertEquals(getHandValue([new Card(1,1), new Card(2,1), new Card(5,1), new Card(8,1), new Card(2,1)]), "flush", "Should recognize flush and value it over pair!"),
-    T.assertEquals(getHandValue([new Card(1,1), new Card(2,1), new Card(3,1), new Card(5,1), new Card(4,1)]), "straight", "Should recognize straight!"),
+    T.assertEquals(getHandValue([new Card(1,1), new Card(2,1), new Card(3,1), new Card(5,1), new Card(4,2)]), "straight", "Should recognize straight!"),
+    T.assertEquals(getHandValue([new Card(1,1), new Card(2,1), new Card(3,1), new Card(5,1), new Card(4,1)]), "straightflush", "Should recognize straight flush!"),
+    T.assertEquals(getHandValue([new Card(10,1), new Card(11,1), new Card(12,1), new Card(13,1), new Card(14,1)]), "royalflush", "Should recognize royal flush!"),
+    T.assertEquals(getHandValue([new Card(8,2), new Card(11,1), new Card(12,1), new Card(13,1), new Card(14,1)]), "nothing", "Should recognize nothing!"),
 ]);
