@@ -1,6 +1,9 @@
 const app = {
     settings: {
-        maxCardValue: 14
+        maxCardValue: 14,
+    },
+    state: {
+        moneyWagered: 0
     }
 };
 
@@ -15,6 +18,19 @@ const handOrder = {
     "poker": 7,
     "straightflush": 8,
     "royalflush": 9
+};
+
+const multiplierTable = {
+    "nothing": 0,
+    "pair": 1,
+    "twopairs": 2,
+    "threeofakind": 3,
+    "straight": 4,
+    "flush": 6,
+    "fullhouse": 9,
+    "poker": 25,
+    "straightflush": 50,
+    "royalflush": 250
 };
 
 const valuePatterns = {
@@ -151,7 +167,7 @@ function getHandValue(hand) {
     }
 }
 
-//Create function to shuffle deck:
+//Create function to shuffle deck (doesn't modify original deck):
 function shuffleDeck(d) {
     const deck = [...d];
     let randIndex;
@@ -162,7 +178,14 @@ function shuffleDeck(d) {
     return deck;
 }
 
+//Pick five cards from deck from specified point, picks from index 0 by default.
 function pickHand(deck, start = 0) {
     return deck.slice(start, start + 5);
 }
 
+//Create function to calculate reward for given hand:
+function calcReward(hand, wagered, mTable) {
+    return mTable[hand] * wagered;
+}
+
+//Create function to start round

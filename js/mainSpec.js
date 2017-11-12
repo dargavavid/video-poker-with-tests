@@ -73,3 +73,10 @@ T.it("Should select cards from deck properly", [
     T.assertSimilar(pickHand(testDeck).map(cardObj => cardObj.value), [2,2,2,2,3], "Should pick first five cards without start point"),
     T.assertSimilar(pickHand(testDeck, 5).map(cardObj => cardObj.value), [3,3,3,4,4], "Should pick second five cards when 5 is specified as starting point"),
 ]);
+
+T.it("Should calculate rewards properly", [
+    T.assertEquals(calcReward("nothing", 1, multiplierTable), 0),
+    T.assertEquals(calcReward("twopairs", 1, multiplierTable), 2),
+    T.assertEquals(calcReward("poker", 1, multiplierTable), 25),
+    T.assertEquals(calcReward("royalflush", 1, multiplierTable), 250),
+]);
