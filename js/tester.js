@@ -43,7 +43,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion passed! --> " + customMessage);
+            console.trace("Assertion failed! X " + customMessage);
             return false;
         }
     }
@@ -59,7 +59,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion passed! --> " + customMessage);
+            console.trace("Assertion failed! X " + customMessage);
             return false;
         }
     }
@@ -78,7 +78,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion passed! --> " + customMessage);
+            console.trace("Assertion failed! X " + customMessage);
             return false;
         }
     }
@@ -97,7 +97,7 @@ class Test {
             console.log("Assertion passed! --> " + customMessage);
             return true;
         } else {
-            console.trace("Assertion passed! --> " + customMessage);
+            console.trace("Assertion failed! X " + customMessage);
             return false;
         }
     }
