@@ -1,4 +1,5 @@
 const T = new Test();
+const testDeck = createDeck(cardValues, suiteValues, cardNames, suiteNames);
 
 T.it("Should create card", [
     T.assertSimilar(createCard(41, 1, "ace of spades"), new Card(41, 1, "ace of spades"))
@@ -51,4 +52,17 @@ T.it("Should get hand values", [
     T.assertEquals(getHandValue([new Card(1,1), new Card(2,1), new Card(3,1), new Card(5,1), new Card(4,1)]), "straightflush", "Should recognize straight flush!"),
     T.assertEquals(getHandValue([new Card(10,1), new Card(11,1), new Card(12,1), new Card(13,1), new Card(14,1)]), "royalflush", "Should recognize royal flush!"),
     T.assertEquals(getHandValue([new Card(8,2), new Card(11,1), new Card(12,1), new Card(13,1), new Card(14,1)]), "nothing", "Should recognize nothing!"),
+]);
+
+T.it("Should shuffle deck", [
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
+    T.assertNotSimilar(shuffleDeck(testDeck), testDeck),
 ]);

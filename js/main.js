@@ -150,3 +150,16 @@ function getHandValue(hand) {
         return handValue;
     }
 }
+
+//Create function to shuffle deck:
+function shuffleDeck(d) {
+    const deck = [...d];
+    let randIndex;
+    for(let i = deck.length; i >= 0; i--) {
+        randIndex = Math.floor(Math.random() * i);
+        [deck[i], deck[randIndex]] = [deck[randIndex], deck[i]];//Swap cards.
+    }
+    return deck;
+}
+
+
