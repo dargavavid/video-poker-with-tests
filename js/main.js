@@ -163,6 +163,6 @@ function shuffleDeck(d) {
 }
 
 function pickHand(deck, start = 0) {
-    return deck.slice(start, 5);
+    return deck.slice(start, start + 5);
 }
 

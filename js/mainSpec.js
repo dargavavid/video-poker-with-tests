@@ -68,6 +68,8 @@ T.it("Should shuffle deck", [
 ]);
 
 
-T.it("Should select 5 cards from deck", [
-    T.assertEquals(pickHand(testDeck).length, 5)
+T.it("Should select cards from deck properly", [
+    T.assertEquals(pickHand(testDeck).length, 5, "Should select 5 cards from deck"),
+    T.assertSimilar(pickHand(testDeck).map(cardObj => cardObj.value), [2,2,2,2,3], "Should pick first five cards without start point"),
+    T.assertSimilar(pickHand(testDeck, 5).map(cardObj => cardObj.value), [3,3,3,4,4], "Should pick second five cards when 5 is specified as starting point"),
 ]);
