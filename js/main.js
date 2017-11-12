@@ -162,7 +162,7 @@ function shuffleDeck(d) {
     return deck;
 }
 
-function pickHand(deck) {
-    return deck.slice(0,5);
+function pickHand(deck, start = 0) {
+    return deck.slice(start, 5);
 }
 
