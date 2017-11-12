@@ -1,6 +1,14 @@
 const T = new Test();
 
 const c1 = new Card("A", "club");
+T.it("Should create card", [
+    T.assertSimilar(createCard(1,1), new Card(1,1))
+]);
+
+T.it("Should create deck", [
+    T.assertSimilar(createDeck(cardValues, suiteValues).map(x => x.value).sort(), [...cardValues,...cardValues, ...cardValues, ...cardValues].sort())
+]);
+
 T.it("Card should have value and suite defined",[
     T.assertEquals(c1.value, "A"),
     T.assertEquals(c1.suite, "club")
@@ -45,4 +53,5 @@ T.it("Should get hand values", [
     T.assertEquals(getHandValue([new Card(2,1), new Card(1,2), new Card(1,3), new Card(1,1), new Card(2,4)]), "fullhouse", "Should recognize full house"),
     T.assertEquals(getHandValue([new Card(1,1), new Card(1,2), new Card(1,3), new Card(1,1), new Card(2,4)]), "poker", "Should recognize poker"),
     T.assertEquals(getHandValue([new Card(1,1), new Card(2,1), new Card(5,1), new Card(8,1), new Card(2,1)]), "flush", "Should recognize flush and value it over pair!"),
+    T.assertEquals(getHandValue([new Card(1,1), new Card(2,1), new Card(3,1), new Card(5,1), new Card(4,1)]), "straight", "Should recognize straight!"),
 ]);

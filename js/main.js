@@ -7,6 +7,12 @@ const app = {
     }
 };
 
+const cardValues = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41];
+const cardNames = ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"];
+const suiteValues = [1, 2, 3, 4];
+const suiteNames = ["spades", "clubs", "hearts", "diamonds"];
+
+
 const valuePatterns = {
     "aabcd": "pair",
     "aabbc": "twopairs",
@@ -17,6 +23,22 @@ const valuePatterns = {
 
 const suitePatterns = {
     "aaaaa": "flush",
+}
+
+function createCard(value, suite) {
+    return new Card(value, suite);
+}
+
+function createDeck(values, suites) {
+    const deck = [];
+    let card;
+    for (let i = 0; i < values.length; i++) {
+        for (let j = 0; j < suites.length; j++) {
+            card = createCard(values[i], suites[j]);
+            deck.push(card);
+        }
+    }
+    return deck;
 }
 
 function isDuplicated(target, elements) {
@@ -84,6 +106,19 @@ function getHandValue(hand) {
     const suitePattern = getPattern(cardSuites);
     const handValue = valuePatterns[valuePattern];
     const suiteValue = suitePatterns[suitePattern];
+
+    //Check straight
+    const isStraight = orderedCardValues.map((card, i, cards) => {
+        if (i > 0) {
+            if (cards[i - 1] + 1 === cards[i]) {
+                return 1;
+            }else {
+                return 0;
+            }
+        }else {
+            return 1;
+        }
+    }).reduce((product, x) => product *= x, 1) === 1;
     if (handValue) {
         return handValue;
     }
