@@ -126,8 +126,8 @@ function shuffleDeck(d) {
 }
 
 //Pick five cards from deck from specified point, picks from index 0 by default.
-function pickHand(deck, start = 0) {
-    return deck.slice(start, start + 5);
+function pickHand(deck, start = 0, end = 5) {
+    return deck.slice(start, end);
 }
 
 //Create function to calculate reward for given hand.
@@ -272,11 +272,14 @@ function roll() {
     }
 }
 
-// function replaceSelectedCards(selected, deck) {
-//     const remainingDeck = [selected, ...deck.slice(5)];
-//     const remainingDeckShuffled = shuffleDeck(remainingDeck);
-
-// }
+function replaceSelectedCards(hand, selected, deck) {
+    const remainingHand = substractArrays(hand, selected);
+    const remainingDeck = [selected, ...deck.slice(5)];
+    const remainingDeckShuffled = shuffleDeck(remainingDeck);
+    const newCards = pickHand(remainingDeckShuffled, 0, selected.length);
+    const newHand = [...remainingHand, ...newCards];
+    return newHand;
+}
 
 function mainLoop(time = 0) {
     window.requestAnimationFrame(mainLoop);
