@@ -238,7 +238,6 @@ function setCardDivValues(values) {
 }
 
 function setCardDivImages(cards) {
-    console.log()
     //Custom tailored tables to svg card names.
     const valTable = {11: "J", 12: "Q", 13: "K", 14: "A"};
     const suiteTable = {1: "C", 2: "S", 3: "D", 4: "H"};
@@ -247,7 +246,7 @@ function setCardDivImages(cards) {
     for (let i = 0; i < app.cardDivs.length; i++) {
         cardVal = valTable[cards[i].value] ? valTable[cards[i].value] : cards[i].value;
         cardSuite = suiteTable[cards[i].suite];
-        app.cardDivs[i].querySelector("img").src = imgPath.replace("%", "" + cardVal + cardSuite);
+        app.cardDivsImgs[i].src = imgPath.replace("%", "" + cardVal + cardSuite);
     }
 }
 
@@ -319,21 +318,21 @@ function handleSelectedCardSwap() {
         }
     }
     const newValues = app.hand.map(card => card.value);
-    setCardDivValues(newValues);
-    // setCardDivImages(app.hand);
+    // setCardDivValues(newValues);
+    setCardDivImages(app.hand);
     removeAllSelectionAndHighlight();
 }
 
 function toggleCardHighlight(e) {
     const target = e.target;
-    console.log(target);
-    const index = parseInt(e.target.id.replace("c", ""));
+    const index = parseInt(e.target.id.replace("ci", ""));
     target.classList.toggle("highlight");
+    console.log(index)
     return index;
 }
 
 function removeAllSelectionAndHighlight() {
-    app.cardDivs.forEach(cardDiv => cardDiv.classList.remove("highlight"));
+    app.cardDivsImgs.forEach(cardDiv => cardDiv.classList.remove("highlight"));
     app.hand.forEach(card => card.isSelected = false);
 }
 
@@ -360,7 +359,7 @@ function handleKeyboardCommands(e) {
 }
 
 function setEventListeners() {
-    app.cardDivs.forEach(cardDiv => cardDiv.addEventListener("click", toggleCardSelection, false));
+    app.cardDivsImgs.forEach(cardDiv => cardDiv.addEventListener("click", toggleCardSelection, false));
     document.addEventListener("keydown", handleKeyboardCommands, false);
 }
 

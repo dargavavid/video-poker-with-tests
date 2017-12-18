@@ -82,6 +82,7 @@ body {
 }
 
 .highlight {
-    background-color: black;
-    border: white solid 5px;
+    /* background-color: black;
+    border: white solid 5px; */
+    opacity: 0.5;
 }
