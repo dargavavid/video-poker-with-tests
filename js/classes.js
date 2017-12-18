@@ -3,6 +3,7 @@ class Card {
         this.value = value;
         this.suite = suite;
         this.name = name;
+        this.isSelected = false;
     }
 }
 

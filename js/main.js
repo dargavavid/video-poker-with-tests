@@ -267,6 +267,7 @@ function roll() {
         app.deck = shuffleDeck(app.deck);
         app.hand = pickHand(app.deck);
         
+        removeAllSelectionAndHighlight();
     }else {
         console.log("still rolling");
     }
@@ -281,6 +282,67 @@ function replaceSelectedCards(hand, selected, deck) {
     return newHand;
 }
 
+function handleSelectedCardSwap() {
+    const selected = app.hand.filter(card => card.isSelected);
+    const notSelected = app.hand.filter(card => !card.isSelected);
+    const deck = [...app.deck.slice(5), ...selected];
+    const deckShuffled = shuffleDeck(deck);
+    const newCards = pickHand(deckShuffled, 0, selected.length);
+
+    // app.hand = newHand;
+    // setCardDivValues(newHand.map(card => card.value));
+    for (let i = 0, j = 0; i < app.hand.length; i++) {
+        if (app.hand[i].isSelected) {
+            app.hand[i] = newCards[j];
+            j++;
+        }
+    }
+    const newValues = app.hand.map(card => card.value);
+    setCardDivValues(newValues);
+    removeAllSelectionAndHighlight();
+}
+
+
+
+function toggleCardHighlight(e) {
+    const target = e.target;
+    const index = parseInt(e.target.id.replace("c", ""));
+    target.classList.toggle("highlight");
+    return index;
+}
+
+function removeAllSelectionAndHighlight() {
+    app.cardDivs.forEach(cardDiv => cardDiv.classList.remove("highlight"));
+    app.hand.forEach(card => card.isSelected = false);
+}
+
+function toggleCardSelection(e) {
+    const index = toggleCardHighlight(e);
+    const isSelected = app.hand[index].isSelected;
+    if (isSelected) {
+        app.hand[index].isSelected = false;
+    }else{
+        app.hand[index].isSelected = true;
+    }
+}
+
+function handleKeyboardCommands(e) {
+    const code = e.keyCode;
+    console.log(code);
+    if (code === 17) {//lctrl
+        roll();
+        console.log(getHandValue(app.hand));
+    }else if (code === 82) {//r
+        handleSelectedCardSwap();
+        console.log(getHandValue(app.hand));
+    }
+}
+
+function setEventListeners() {
+    app.cardDivs.forEach(cardDiv => cardDiv.addEventListener("click", toggleCardSelection, false));
+    document.addEventListener("keydown", handleKeyboardCommands, false);
+}
+
 function mainLoop(time = 0) {
     window.requestAnimationFrame(mainLoop);
     if (app.state.isRolling) {
@@ -289,6 +351,8 @@ function mainLoop(time = 0) {
 }
 
 mainLoop();
+setEventListeners();
+roll();
 // function createDisplayCards(canvas, n = 5) {
 //     const displayCards = [];
 //     const horizontalGap = 10, verticalGap = 50;
