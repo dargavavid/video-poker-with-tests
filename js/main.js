@@ -226,8 +226,23 @@ function toggleCardHideShow() {
 }
 
 function setCardDivValues(values) {
+    console.log(values);
     for (let i = 0; i < values.length; i++) {
         app.cardDivs[i].innerText = values[i];
+    }
+}
+
+function setCardDivImages(cards) {
+    console.log()
+    //Custom tailored tables to svg card names.
+    const valTable = {11: "J", 12: "Q", 13: "K", 14: "A"};
+    const suiteTable = {1: "C", 2: "S", 3: "D", 4: "H"};
+    const imgPath = "../cards-svg/%.svg";
+    let cardVal, cardSuite;
+    for (let i = 0; i < app.cardDivs.length; i++) {
+        cardVal = valTable[cards[i].value] ? valTable[cards[i].value] : cards[i].value;
+        cardSuite = suiteTable[cards[i].suite];
+        app.cardDivs[i].src = imgPath.replace("%", "" + cardVal + cardSuite);
     }
 }
 
@@ -250,7 +265,8 @@ function animateCardsInOut() {
     if (!app.state.movedCardsIn && currentDuration >= app.settings.rollAnimDuration/2) {
         toggleCardHideShow();
         app.state.movedCardsIn = true;
-        setCardDivValues(app.hand.map(cardObj => cardObj.value));
+        // setCardDivValues(app.hand.map(cardObj => cardObj.value));
+        setCardDivImages(app.hand);
     }
     if (detectAnimationEnd(app.state.rollStartDate, app.settings.rollAnimDuration)) {
         app.state.isRolling = false;
@@ -299,6 +315,7 @@ function handleSelectedCardSwap() {
     }
     const newValues = app.hand.map(card => card.value);
     setCardDivValues(newValues);
+    // setCardDivImages(app.hand);
     removeAllSelectionAndHighlight();
 }
 
