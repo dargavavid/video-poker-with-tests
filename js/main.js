@@ -194,6 +194,7 @@ const app = {
     canvas: document.querySelector("#canvas"),
     ctx: this.canvas.getContext("2d"),
     cardDivs: document.querySelectorAll(".card"),
+    cardDivsImgs: document.querySelectorAll(".card-img"),
     deck: createDeck(cardValues, suiteValues, cardNames, suiteNames),
     hand: [],
     displayCards: [],
@@ -219,9 +220,13 @@ function setRoundStartDate() {
 }
 
 function toggleCardHideShow() {
-    app.cardDivs.forEach(cardDiv => {
-        cardDiv.classList.toggle("cardHide");
-        cardDiv.classList.toggle("cardShow");
+    // app.cardDivs.forEach(cardDiv => {
+    //     cardDiv.querySelector("img").classList.toggle("cardHide");
+    //     cardDiv.querySelector("img").classList.toggle("cardShow");
+    // });
+    app.cardDivsImgs.forEach(cardDivsImg => {
+        cardDivsImg.classList.toggle("cardHide");
+        cardDivsImg.classList.toggle("cardShow");
     });
 }
 
@@ -242,7 +247,7 @@ function setCardDivImages(cards) {
     for (let i = 0; i < app.cardDivs.length; i++) {
         cardVal = valTable[cards[i].value] ? valTable[cards[i].value] : cards[i].value;
         cardSuite = suiteTable[cards[i].suite];
-        app.cardDivs[i].src = imgPath.replace("%", "" + cardVal + cardSuite);
+        app.cardDivs[i].querySelector("img").src = imgPath.replace("%", "" + cardVal + cardSuite);
     }
 }
 
@@ -319,10 +324,9 @@ function handleSelectedCardSwap() {
     removeAllSelectionAndHighlight();
 }
 
-
-
 function toggleCardHighlight(e) {
     const target = e.target;
+    console.log(target);
     const index = parseInt(e.target.id.replace("c", ""));
     target.classList.toggle("highlight");
     return index;
