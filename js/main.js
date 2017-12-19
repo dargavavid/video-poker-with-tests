@@ -369,6 +369,15 @@ function handleKeyboardCommands(e) {
 function setEventListeners() {
     app.cardDivsImgs.forEach(cardDiv => cardDiv.addEventListener("click", toggleCardSelection, false));
     document.addEventListener("keydown", handleKeyboardCommands, false);
+    
+    document.addEventListener("keydown", (e) => {
+        const kc = e.keyCode;
+        if (kc === 37) {
+            handleWagerDecrease();
+        }else if (kc === 39) {
+            handleWagerIncrease();
+        }
+    }, false);
 }
 
 function mainLoop(time = 0) {
@@ -386,7 +395,6 @@ function displayWin(winningHand) {
                 handTypeDiv.classList.add("win-highlight");
             }
         });
-        console.log("wins-" + wagered + "-" + winningHand)
         document.querySelector(".wins-" + wagered + "-" + winningHand).classList.add("win-highlight");
     }
 }
@@ -401,9 +409,43 @@ function clearWin() {
     });
 }
 
+function deselectAllWinDivs() {
+    app.winDivs.forEach(winDiv => {
+        winDiv.classList.remove("wager-highlight");
+    });
+}
+
+function selectCurrentWinDiv() {
+    [...app.winDivs].filter((div, i) => (i) === app.state.moneyWagered - 1)[0].classList.add("wager-highlight");
+}
+
+function increaseWager() {
+    if (app.state.moneyWagered < 5) {
+        app.state.moneyWagered += 1;
+    }
+}
+
+function decreaseWager() {
+    if (app.state.moneyWagered > 1) {
+        app.state.moneyWagered -= 1;
+    }
+}
+
+function handleWagerDecrease() {
+    decreaseWager();
+    deselectAllWinDivs();
+    selectCurrentWinDiv();
+}
+
+function handleWagerIncrease() {
+    increaseWager();
+    deselectAllWinDivs();
+    selectCurrentWinDiv();
+}
+
 mainLoop();
 setEventListeners();
-roll();
+// roll();
 // function createDisplayCards(canvas, n = 5) {
 //     const displayCards = [];
 //     const horizontalGap = 10, verticalGap = 50;
