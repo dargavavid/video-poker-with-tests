@@ -18,11 +18,16 @@ body {
     display: none;
 }
 
+.app {
+    max-width: 1200px;
+}
+
 .card-container {
     display: flex;
-    max-width: 1000px;
+    width: 100%;
     background-color: royalblue;
     overflow: hidden;
+    text-align: center;
 }
 
 .card {
@@ -92,7 +97,7 @@ body {
     max-width: 1000%;
     padding: 25px;
     color: white;
-    font-size: 30px;
+    font-size: 2vw;
     border: blue solid 10px;
 }
 
@@ -102,6 +107,7 @@ body {
 
 .wins {
     width: 16%;
+    font-weight: 600;
     text-align: center;
 }
 
