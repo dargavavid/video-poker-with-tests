@@ -8,12 +8,75 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="win-table">
+        <div class="hands">
+            <div class="hands-royalflush hand-type">Royal Flush</div>
+            <div class="hands-straightflush hand-type">Straight Flush</div>
+            <div class="hands-poker hand-type">Poker</div>
+            <div class="hands-fullhouse hand-type">Full House</div>
+            <div class="hands-flush hand-type">Flush</div>
+            <div class="hands-straight hand-type">Straight</div>
+            <div class="hands-threeofakind hand-type">3 of a Kind</div>
+            <div class="hands-twopairs hand-type">Two Pairs</div>
+            <div class="hands-onepair hand-type">One Pair</div>
+        </div>
+        <div class="wins-1 wins selected-wins">
+            <div class="wins-1-royalflush">250</div>
+            <div class="wins-1-straightflush">50</div>
+            <div class="wins-1-poker">25</div>
+            <div class="wins-1-fullhouse">9</div>
+            <div class="wins-1-flush">6</div>
+            <div class="wins-1-straight">4</div>
+            <div class="wins-1-threeofakind">3</div>
+            <div class="wins-1-twopairs">2</div>
+            <div class="wins-1-onepair">1</div>
+        </div>
+        <div class="wins-2 wins">
+            <div class="wins-2-royalflush">500</div>
+            <div class="wins-2-straightflush">100</div>
+            <div class="wins-2-poker">50</div>
+            <div class="wins-2-fullhouse">18</div>
+            <div class="wins-2-flush">12</div>
+            <div class="wins-2-straight">8</div>
+            <div class="wins-2-threeofakind">6</div>
+            <div class="wins-2-twopairs">4</div>
+            <div class="wins-2-onepair">2</div>
+        </div>
+        <div class="wins-3 wins">
+            <div class="wins-3-royalflush">750</div>
+            <div class="wins-3-straightflush">150</div>
+            <div class="wins-3-poker">75</div>
+            <div class="wins-3-fullhouse">27</div>
+            <div class="wins-3-flush">18</div>
+            <div class="wins-3-straight">12</div>
+            <div class="wins-3-threeofakind">9</div>
+            <div class="wins-3-twopairs">6</div>
+            <div class="wins-3-onepair">3</div>
+        </div>
+        <div class="wins-4 wins">
+            <div class="wins-4-royalflush">1000</div>
+            <div class="wins-4-straightflush">200</div>
+            <div class="wins-4-poker">100</div>
+            <div class="wins-4-fullhouse">36</div>
+            <div class="wins-4-flush">24</div>
+            <div class="wins-4-straight">16</div>
+            <div class="wins-4-threeofakind">12</div>
+            <div class="wins-4-twopairs">8</div>
+            <div class="wins-4-onepair">4</div>
+        </div>
+        <div class="wins-5 wins">
+            <div class="wins-5-royalflush">4000</div>
+            <div class="wins-5-straightflush">250</div>
+            <div class="wins-5-poker">125</div>
+            <div class="wins-5-fullhouse">45</div>
+            <div class="wins-5-flush">30</div>
+            <div class="wins-5-straight">20</div>
+            <div class="wins-5-threeofakind">15</div>
+            <div class="wins-5-twopairs">10</div>
+            <div class="wins-5-onepair">5</div>
+        </div>
+    </div>
     <div class="card-container">
-        <!-- <div id="c0" class="card cardShow">1</div>
-        <div id="c1" class="card cardShow"></div>
-        <div id="c2" class="card cardShow"></div>
-        <div id="c3" class="card cardShow"></div>
-        <div id="c4" class="card cardShow"></div> -->
         <div id="c0" class="card">
             <img id="ci0" class="card-img cardShow" src="cards-svg/AH.svg" alt="Image of a french playing card.">
         </div>
@@ -29,11 +92,6 @@
         <div id="c4" class="card">
             <img id="ci4" class="card-img cardShow" src="cards-svg/AH.svg" alt="Image of a french playing card.">            
         </div>
-        <!-- <img id="c1" class="card cardShow" src="cards-svg/AH.svg"></img>
-        <img id="c0" class="card cardShow" src="cards-svg/AH.svg"></img>
-        <img id="c2" class="card cardShow" src="cards-svg/AH.svg"></img>
-        <img id="c3" class="card cardShow" src="cards-svg/AH.svg"></img>
-        <img id="c4" class="card cardShow" src="cards-svg/AH.svg"></img> -->
     </div>
     <canvas id="canvas" width="800" height="300"></canvas>
     <script src="js/tester.js"></script>
