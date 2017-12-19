@@ -93,6 +93,7 @@ body {
     padding: 25px;
     color: white;
     font-size: 30px;
+    border: blue solid 10px;
 }
 
 .hands {
@@ -106,4 +107,8 @@ body {
 
 .selected-wins {
     background-color: blue;
+}
+
+.win-highlight {
+    color: red;
 }

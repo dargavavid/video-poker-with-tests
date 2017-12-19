@@ -195,6 +195,9 @@ const app = {
     ctx: this.canvas.getContext("2d"),
     cardDivs: document.querySelectorAll(".card"),
     cardDivsImgs: document.querySelectorAll(".card-img"),
+    handTypeDivs: document.querySelectorAll(".hand-type"),
+    winDivs: document.querySelectorAll(".wins"),
+    winHandDivs: document.querySelectorAll(".wins-hand"),
     deck: createDeck(cardValues, suiteValues, cardNames, suiteNames),
     hand: [],
     displayCards: [],
@@ -348,13 +351,18 @@ function toggleCardSelection(e) {
 
 function handleKeyboardCommands(e) {
     const code = e.keyCode;
-    console.log(code);
+    let handVal;
     if (code === 17) {//lctrl
+        clearWin();
         roll();
-        console.log(getHandValue(app.hand));
+        handVal = getHandValue(app.hand);
+        setTimeout(() => displayWin(handVal), 1000);
+        // displayWin(handVal);
     }else if (code === 82) {//r
+        clearWin();
         handleSelectedCardSwap();
-        console.log(getHandValue(app.hand));
+        handVal = getHandValue(app.hand);
+        displayWin(handVal);
     }
 }
 
@@ -368,6 +376,29 @@ function mainLoop(time = 0) {
     if (app.state.isRolling) {
         animateCardsInOut();
     }
+}
+
+function displayWin(winningHand) {
+    const wagered = app.state.moneyWagered;
+    if (winningHand !== "nothing") {
+        app.handTypeDivs.forEach(handTypeDiv => {
+            if (handTypeDiv.classList.contains("hands-" + winningHand)) {
+                handTypeDiv.classList.add("win-highlight");
+            }
+        });
+        console.log("wins-" + wagered + "-" + winningHand)
+        document.querySelector(".wins-" + wagered + "-" + winningHand).classList.add("win-highlight");
+    }
+}
+
+function clearWin() {
+    app.handTypeDivs.forEach(handTypeDiv => {
+        handTypeDiv.classList.remove("win-highlight");
+    });
+
+    app.winHandDivs.forEach(winHandDiv => {
+        winHandDiv.classList.remove("win-highlight");
+    });
 }
 
 mainLoop();
